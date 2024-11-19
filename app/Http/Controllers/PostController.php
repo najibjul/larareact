@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(5);
 
         return response()->json([
             'success' => true,
@@ -28,7 +28,7 @@ class PostController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());
+            return response()->json([$validator->errors()],400);
         }
 
         $image = $request->file('image');
